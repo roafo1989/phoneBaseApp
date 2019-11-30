@@ -5,9 +5,9 @@ import ru.home.phoneBaseApp.model.PhoneBaseNote;
 import java.util.List;
 
 public interface PhoneBaseNoteRepos {
-    PhoneBaseNote save(PhoneBaseNote phoneBaseNote, int subscriberId);
-    boolean delete(int id, int subscriberId);
-    PhoneBaseNote getById(int id, int subscriberId);
-    List<PhoneBaseNote> getAll(int subscriberId);
-    PhoneBaseNote getByNumber(long number, int subscriberId);
+    PhoneBaseNote save(PhoneBaseNote phoneBaseNote, int userId);
+    boolean delete(int id, int userId);
+    PhoneBaseNote getById(int id, int userId);
+    List<PhoneBaseNote> getAll(int userId);
+    PhoneBaseNote getByNumber(long number, int userId);
 }
