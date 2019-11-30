@@ -24,20 +24,16 @@ public class PhoneBaseNote extends AbstractNamedEntity {
     @JoinColumn(name = "user_id", nullable = false)
     @NonNull
     private User user;
+
     public PhoneBaseNote() {
     }
-    public PhoneBaseNote(PhoneBaseNote phoneBaseNote){
-        this(phoneBaseNote.getId(),
-                phoneBaseNote.getName(),
-                phoneBaseNote.getLastname(),
-                phoneBaseNote.getSurname(),
-                phoneBaseNote.getNumber(),
-                phoneBaseNote.getComment());
+    public PhoneBaseNote(String name, long number, String comment){
+        this(null,name,number,comment);
     }
 
 
-    public PhoneBaseNote(int id, String name, String lastname, String surname, long number, String comment) {
-        super(id, name, lastname, surname);
+    public PhoneBaseNote(Integer id, String name, long number, String comment) {
+        super(id, name);
         this.number = number;
         this.comment = comment;
     }

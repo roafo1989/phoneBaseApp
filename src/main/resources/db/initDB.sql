@@ -8,11 +8,9 @@ CREATE SEQUENCE global_seq START WITH 100000;
 CREATE TABLE users
 (
     id               INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
-    name             VARCHAR                 NOT NULL,
-    lastname         VARCHAR                 NOT NULL,
-    surname          VARCHAR                 NOT NULL
+    name             VARCHAR                 NOT NULL
 );
-
+CREATE UNIQUE INDEX users_unique_email_idx ON users (name);
 
 CREATE TABLE user_roles
 (
@@ -27,9 +25,9 @@ CREATE TABLE notes
     id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
     user_id     INTEGER   NOT NULL,
     name        VARCHAR   NOT NULL,
-    lastname    VARCHAR,
-    surname     VARCHAR,
     number      BIGINT    NOT NULL,
     comment     TEXT,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
+CREATE UNIQUE INDEX meals_unique_user_number_idx
+    ON notes (user_id, number);

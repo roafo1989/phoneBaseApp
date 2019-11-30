@@ -36,10 +36,7 @@ public class NoteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         PhoneBaseNote note = new PhoneBaseNote(
-                Integer.parseInt(request.getParameter("id")),
                 request.getParameter("name"),
-                request.getParameter("lastname"),
-                request.getParameter("surname"),
                 Long.parseLong(request.getParameter("number")),
                 request.getParameter("comment")
         );

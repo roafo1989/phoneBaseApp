@@ -24,8 +24,6 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Lastname</th>
-            <th>Surname</th>
             <th></th>
             <th></th>
         </tr>
@@ -34,8 +32,6 @@
             <jsp:useBean id="note" type="ru.home.phoneBaseApp.model.User"/>
             <tr>
                 <td>${user.name}</td>
-                <td>${user.lastname}</td>
-                <td>${user.surname}</td>
                 <td><a href="users?action=update&id=${user.id}">Update</a></td>
                 <td><a href="users?action=delete&id=${user.id}">Delete</a></td>
             </tr>

@@ -29,7 +29,7 @@ public class JdbcNoteRepository implements PhoneBaseNoteRepos {
     @Autowired
     public JdbcNoteRepository(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.insertMeal = new SimpleJdbcInsert(jdbcTemplate)
-                .withTableName("meals")
+                .withTableName("notess")
                 .usingGeneratedKeyColumns("id");
 
         this.jdbcTemplate = jdbcTemplate;
@@ -41,8 +41,6 @@ public class JdbcNoteRepository implements PhoneBaseNoteRepos {
         MapSqlParameterSource map = new MapSqlParameterSource()
                 .addValue("id", phoneBaseNote.getId())
                 .addValue("name", phoneBaseNote.getName())
-                .addValue("lastname", phoneBaseNote.getLastname())
-                .addValue("surname", phoneBaseNote.getSurname())
                 .addValue("number", phoneBaseNote.getNumber())
                 .addValue("comment", phoneBaseNote.getComment())
                 .addValue("user_id", userId);
@@ -53,7 +51,7 @@ public class JdbcNoteRepository implements PhoneBaseNoteRepos {
         } else {
             if (namedParameterJdbcTemplate.update("" +
                             "UPDATE notes " +
-                            "   SET name=:name, lastname=:lastname, surname=:surname, number=:number, comment=:comment " +
+                            "   SET name=:name, number=:number, comment=:comment " +
                             " WHERE id=:id AND user_id=:user_id"
                     , map) == 0) {
                 return null;

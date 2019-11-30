@@ -19,14 +19,6 @@
             <dd><input type="text" value="${note.name}" size=40 name="name" required></dd>
         </dl>
         <dl>
-            <dt>Lastname:</dt>
-            <dd><input type="text" value="${note.lastname}" size=40 name="lastname"></dd>
-        </dl>
-        <dl>
-            <dt>Surname:</dt>
-            <dd><input type="text" value="${note.surname}" size=40 name="surname"></dd>
-        </dl>
-        <dl>
             <dt>Phone Numbers:</dt>
             <dd><input type="number" value="${note.number}" name="number" required></dd>
         </dl>

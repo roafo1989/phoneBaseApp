@@ -19,8 +19,6 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Lastname</th>
-            <th>Surname</th>
             <th>Number</th>
             <th>Comment</th>
             <th></th>
@@ -31,8 +29,6 @@
             <jsp:useBean id="note" type="ru.home.phoneBaseApp.model.PhoneBaseNote"/>
             <tr>
                 <td>${note.name}</td>
-                <td>${note.lastname}</td>
-                <td>${note.surname}</td>
                 <td>${note.number}</td>
                 <td>${note.comment}</td>
                 <td><a href="notes?action=update&id=${note.id}">Update</a></td>

@@ -30,10 +30,10 @@ public class User extends AbstractNamedEntity {
     }
 
     public User(User u){
-        this(u.getId(),u.getName(),u.getLastname(),u.getSurname(),u.getRoles());
+        this(u.getId(),u.getName(),u.getRoles());
     }
-    public User(Integer id, String name, String lastname, String surname, Collection<Role> roles) {
-        super(id, name, lastname, surname);
+    public User(Integer id, String name, Collection<Role> roles) {
+        super(id, name);
         setRoles(roles);
     }
 
