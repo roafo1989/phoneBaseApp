@@ -16,7 +16,14 @@
     <h3><a href="index.html">Home</a></h3>
     <hr/>
     <h2>Users</h2>
-
+    <form method="get" action="users">
+    <input type="hidden" name="action" value="filter">
+    <dl>
+        <dt>Name for find:</dt>
+        <dd><input type="text" name="name" value="${param.name}"></dd>
+    </dl>
+    <button type="submit">Filter</button>
+    </form>
     <hr/>
     <a href="users?action=create">Add User</a>
     <br><br>

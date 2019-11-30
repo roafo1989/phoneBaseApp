@@ -11,7 +11,14 @@
     <h3><a href="index.html">Home</a></h3>
     <hr/>
     <h2>Notes</h2>
-
+    <form method="get" action="notes">
+        <input type="hidden" name="action" value="filter">
+        <dl>
+            <dt>Number for find:</dt>
+            <dd><input type="number" name="number" value="${param.number}"></dd>
+        </dl>
+        <button type="submit">Filter</button>
+    </form>
     <hr/>
     <a href="notes?action=create">Add Note</a>
     <br><br>

@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class NoteServlet extends HttpServlet {
+
     private ConfigurableApplicationContext springContext;
     private PhoneBaseNoteController controller;
 
@@ -61,11 +62,14 @@ public class NoteServlet extends HttpServlet {
                 break;
             case "create":
             case "update":
-                final PhoneBaseNote note = "create".equals(action) ?
-                        new PhoneBaseNote() :
-                        controller.getById(getId(request));
+                final PhoneBaseNote note = "create".equals(action) ? new PhoneBaseNote() : controller.getById(getId(request));
                 request.setAttribute("note", note);
                 request.getRequestDispatcher("/noteForm.jsp").forward(request, response);
+                break;
+            case "filter":
+                long number = Long.parseLong(request.getParameter("number"));
+                request.setAttribute("notes",controller.getByNumber(number));
+                request.getRequestDispatcher("/notes.jsp").forward(request, response);
                 break;
             case "all":
             default:
