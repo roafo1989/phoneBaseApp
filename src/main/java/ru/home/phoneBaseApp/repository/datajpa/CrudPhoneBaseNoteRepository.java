@@ -23,5 +23,5 @@ public interface CrudPhoneBaseNoteRepository extends JpaRepository<PhoneBaseNote
     List<PhoneBaseNote> getAll(@Param("userId") int userId);
 
     @Query("SELECT p from PhoneBaseNote p WHERE p.user.id=:userId AND p.number=:number ORDER BY p.name DESC")
-    PhoneBaseNote getByNumber(@Param("number") Long number, @Param("userId") int userId);
+    List<PhoneBaseNote> getByNumber(@Param("number") Long number, @Param("userId") int userId);
 }

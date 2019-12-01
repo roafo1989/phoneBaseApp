@@ -40,7 +40,7 @@ public class DataJpaNoteRepository implements PhoneBaseNoteRepos {
     }
 
     @Override
-    public PhoneBaseNote getByNumber(long number, int userId) {
+    public List<PhoneBaseNote> getByNumber(long number, int userId) {
         return crudPhoneBaseNoteRepository.getByNumber(number,userId);
     }
 }

@@ -40,7 +40,7 @@ public class PhoneBaseNoteService{
         return repos.getAll(userId);
     }
 
-    public PhoneBaseNote getByNumber(long number, int userId) {
+    public List<PhoneBaseNote> getByNumber(long number, int userId) {
         Assert.notNull(number,"number must be not null");
         return checkNotFound(repos.getByNumber(number, userId),"number: ");
     }

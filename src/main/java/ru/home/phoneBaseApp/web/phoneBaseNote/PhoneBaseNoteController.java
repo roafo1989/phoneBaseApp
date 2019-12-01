@@ -53,7 +53,7 @@ public class PhoneBaseNoteController {
         log.info("update {} for user {}", phoneBaseNote, userId);
         service.update(phoneBaseNote, userId);
     }
-    public PhoneBaseNote getByNumber(long number){
+    public List<PhoneBaseNote> getByNumber(long number){
         int userId = SecurityUtil.authUserId();
         log.info("get note {} for user {}", number, userId);
         return service.getByNumber(number,userId);

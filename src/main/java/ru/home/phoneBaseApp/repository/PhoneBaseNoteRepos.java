@@ -9,5 +9,5 @@ public interface PhoneBaseNoteRepos {
     boolean delete(int id, int userId);
     PhoneBaseNote getById(int id, int userId);
     List<PhoneBaseNote> getAll(int userId);
-    PhoneBaseNote getByNumber(long number, int userId);
+    List<PhoneBaseNote> getByNumber(long number, int userId);
 }

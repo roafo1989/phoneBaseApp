@@ -54,10 +54,15 @@ public class PhoneBaseNoteReposImpl implements PhoneBaseNoteRepos {
     }
 
     @Override
-    public PhoneBaseNote getByNumber(long number, int userId) {
-        List<PhoneBaseNote> notes = em.createNamedQuery(PhoneBaseNote.BY_NUMBER, PhoneBaseNote.class)
+    public List<PhoneBaseNote> getByNumber(long number, int userId) {
+/*        List<PhoneBaseNote> notes = em.createNamedQuery(PhoneBaseNote.BY_NUMBER, PhoneBaseNote.class)
                 .setParameter(1, number)
                 .getResultList();
-        return DataAccessUtils.singleResult(notes);
+        return DataAccessUtils.singleResult(notes);*/
+
+        return em.createNamedQuery(PhoneBaseNote.BY_NUMBER, PhoneBaseNote.class)
+                .setParameter(1, number)
+                .setParameter("userId",userId)
+                .getResultList();
     }
 }

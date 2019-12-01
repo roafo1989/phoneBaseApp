@@ -79,9 +79,9 @@ public class JdbcNoteRepository implements PhoneBaseNoteRepos {
     }
 
     @Override
-    public PhoneBaseNote getByNumber(long number, int userId) {
-//        return jdbcTemplate.queryForObject("SELECT * FROM users WHERE email=?", ROW_MAPPER, email);
-        List<PhoneBaseNote> notes = jdbcTemplate.query("SELECT * FROM notes WHERE number=? AND user_id = ?", ROW_MAPPER, number, userId);
-        return DataAccessUtils.singleResult(notes);
+    public List<PhoneBaseNote> getByNumber(long number, int userId) {
+       /* List<PhoneBaseNote> notes = jdbcTemplate.query("SELECT * FROM notes WHERE number=? AND user_id = ?", ROW_MAPPER, number, userId);
+        return DataAccessUtils.singleResult(notes);*/
+       return jdbcTemplate.query("SELECT * FROM notes WHERE number=? AND user_id = ?", ROW_MAPPER, number, userId);
     }
 }
