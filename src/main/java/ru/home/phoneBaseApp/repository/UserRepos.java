@@ -10,4 +10,5 @@ public interface UserRepos {
     boolean delete(int id);
     User getById(int id);
     User getByName(String name);
+    default User getWithNotes(int id){throw new UnsupportedOperationException();}
 }

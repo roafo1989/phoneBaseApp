@@ -4,25 +4,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ru.home.phoneBaseApp.model.PhoneBaseNote;
-import ru.home.phoneBaseApp.service.PhoneBaseNoteService;
+import ru.home.phoneBaseApp.model.Note;
+import ru.home.phoneBaseApp.service.NoteService;
 import ru.home.phoneBaseApp.web.SecurityUtil;
 
 import java.util.List;
 
 import static ru.home.phoneBaseApp.util.ValidationUtil.assureIdConsistent;
 import static ru.home.phoneBaseApp.util.ValidationUtil.checkNew;
-@Controller
-public class PhoneBaseNoteController {
-    private static final Logger log = LoggerFactory.getLogger(PhoneBaseNoteController.class);
-    private final PhoneBaseNoteService service;
+
+public abstract class AbstractNoteController {
+    private static final Logger log = LoggerFactory.getLogger(AbstractNoteController.class);
 
     @Autowired
-    public PhoneBaseNoteController(PhoneBaseNoteService service) {
-        this.service = service;
-    }
+    private NoteService service;
 
-    public PhoneBaseNote getById(int id){
+
+    public Note getById(int id){
         int userId = SecurityUtil.authUserId();
         log.info("get note {} for user {}", id, userId);
         return service.getById(id, userId);
@@ -34,26 +32,26 @@ public class PhoneBaseNoteController {
         service.delete(id, userId);
     }
 
-    public List<PhoneBaseNote> getAll() {
+    public List<Note> getAll() {
         int userId = SecurityUtil.authUserId();
         log.info("getAll for user {}", userId);
         return service.getAll(userId);
     }
 
-    public PhoneBaseNote create(PhoneBaseNote phoneBaseNote) {
+    public Note create(Note note) {
         int userId = SecurityUtil.authUserId();
-        checkNew(phoneBaseNote);
-        log.info("create {} for user {}", phoneBaseNote, userId);
-        return service.create(phoneBaseNote, userId);
+        checkNew(note);
+        log.info("create {} for user {}", note, userId);
+        return service.create(note, userId);
     }
 
-    public void update(PhoneBaseNote phoneBaseNote, int id) {
+    public void update(Note note, int id) {
         int userId = SecurityUtil.authUserId();
-        assureIdConsistent(phoneBaseNote, id);
-        log.info("update {} for user {}", phoneBaseNote, userId);
-        service.update(phoneBaseNote, userId);
+        assureIdConsistent(note, id);
+        log.info("update {} for user {}", note, userId);
+        service.update(note, userId);
     }
-    public List<PhoneBaseNote> getByNumber(long number){
+    public List<Note> getByNumber(long number){
         int userId = SecurityUtil.authUserId();
         log.info("get note {} for user {}", number, userId);
         return service.getByNumber(number,userId);

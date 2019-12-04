@@ -4,11 +4,11 @@
 <html>
 <head>
     <title>Notes</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
 <section>
-    <h3><a href="index.html">Home</a></h3>
+    <h3><a href="index.jsp">Home</a></h3>
     <hr/>
     <h2>Notes</h2>
     <form method="get" action="notes">
@@ -33,7 +33,7 @@
         </tr>
         </thead>
         <c:forEach items="${notes}" var="note">
-            <jsp:useBean id="note" type="ru.home.phoneBaseApp.model.PhoneBaseNote"/>
+            <jsp:useBean id="note" type="ru.home.phoneBaseApp.model.Note"/>
             <tr>
                 <td>${note.name}</td>
                 <td>${note.number}</td>

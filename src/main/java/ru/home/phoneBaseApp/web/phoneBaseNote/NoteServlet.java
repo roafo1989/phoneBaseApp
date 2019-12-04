@@ -1,11 +1,9 @@
-package ru.home.phoneBaseApp.web;
+package ru.home.phoneBaseApp.web.phoneBaseNote;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.StringUtils;
-import ru.home.phoneBaseApp.model.PhoneBaseNote;
-import ru.home.phoneBaseApp.model.User;
-import ru.home.phoneBaseApp.web.phoneBaseNote.PhoneBaseNoteController;
+import ru.home.phoneBaseApp.model.Note;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -18,13 +16,13 @@ import java.util.Objects;
 public class NoteServlet extends HttpServlet {
 
     private ConfigurableApplicationContext springContext;
-    private PhoneBaseNoteController controller;
+    private AbstractNoteController controller;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
-        controller = springContext.getBean(PhoneBaseNoteController.class);
+        controller = springContext.getBean(AbstractNoteController.class);
     }
 
     @Override
@@ -36,7 +34,7 @@ public class NoteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        PhoneBaseNote note = new PhoneBaseNote(
+        Note note = new Note(
                 request.getParameter("name"),
                 Long.parseLong(request.getParameter("number")),
                 request.getParameter("comment")
@@ -62,7 +60,7 @@ public class NoteServlet extends HttpServlet {
                 break;
             case "create":
             case "update":
-                final PhoneBaseNote note = "create".equals(action) ? new PhoneBaseNote() : controller.getById(getId(request));
+                final Note note = "create".equals(action) ? new Note() : controller.getById(getId(request));
                 request.setAttribute("note", note);
                 request.getRequestDispatcher("/noteForm.jsp").forward(request, response);
                 break;

@@ -13,7 +13,7 @@
 </head>
 <body>
 <section>
-    <h3><a href="index.html">Home</a></h3>
+    <h3><a href="index.jsp">Home</a></h3>
     <hr/>
     <h2>Users</h2>
     <form method="get" action="users">
@@ -31,14 +31,16 @@
         <thead>
         <tr>
             <th>Name</th>
+            <th>Role</th>
             <th></th>
             <th></th>
         </tr>
         </thead>
         <c:forEach items="${users}" var="user">
-            <jsp:useBean id="note" type="ru.home.phoneBaseApp.model.User"/>
+            <jsp:useBean id="user" type="ru.home.phoneBaseApp.model.User"/>
             <tr>
                 <td>${user.name}</td>
+                <td>${user.roles}</td>
                 <td><a href="users?action=update&id=${user.id}">Update</a></td>
                 <td><a href="users?action=delete&id=${user.id}">Delete</a></td>
             </tr>

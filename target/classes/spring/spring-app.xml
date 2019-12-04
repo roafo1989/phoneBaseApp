@@ -11,6 +11,4 @@
 
     <context:component-scan base-package="ru.home.**.service"/>
 
-    <context:component-scan base-package="ru.home.**.web"/>
-
 </beans>

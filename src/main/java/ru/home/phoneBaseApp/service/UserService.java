@@ -44,4 +44,8 @@ public class UserService {
         Assert.notNull(name,"name must be not null");
         return checkNotFound(repository.getByName(name),"name is " + name);
     }
+    public User getWithNotes(int id){
+        return checkNotFoundWithId(repository.getWithNotes(id), id);
+    }
+
 }

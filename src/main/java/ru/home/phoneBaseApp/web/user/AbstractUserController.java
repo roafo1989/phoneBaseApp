@@ -43,7 +43,7 @@ public class AbstractUserController {
     }
 
     public User getByName(String name) {
-        log.info("getByEmail {}", name);
+        log.info("getByName {}", name);
         return service.getByName(name);
     }
 }

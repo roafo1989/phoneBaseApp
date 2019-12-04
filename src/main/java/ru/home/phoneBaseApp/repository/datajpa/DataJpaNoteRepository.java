@@ -2,45 +2,50 @@ package ru.home.phoneBaseApp.repository.datajpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.home.phoneBaseApp.model.PhoneBaseNote;
-import ru.home.phoneBaseApp.repository.PhoneBaseNoteRepos;
+import ru.home.phoneBaseApp.model.Note;
+import ru.home.phoneBaseApp.repository.NoteRepos;
 
 import java.util.List;
 
 @Repository
-public class DataJpaNoteRepository implements PhoneBaseNoteRepos {
+public class DataJpaNoteRepository implements NoteRepos {
     @Autowired
     private CrudUserRepository crudUserRepository;
     @Autowired
-    private CrudPhoneBaseNoteRepository crudPhoneBaseNoteRepository;
+    private CrudNoteRepository crudNoteRepository;
 
 
     @Override
-    public PhoneBaseNote save(PhoneBaseNote phoneBaseNote, int userId) {
-        if(!phoneBaseNote.isNew() && getById(phoneBaseNote.getId(),userId) == null){
+    public Note save(Note note, int userId) {
+        if(!note.isNew() && getById(note.getId(),userId) == null){
             return null;
         }
-        phoneBaseNote.setUser(crudUserRepository.getOne(userId));
-        return crudPhoneBaseNoteRepository.save(phoneBaseNote);
+        note.setUser(crudUserRepository.getOne(userId));
+        return crudNoteRepository.save(note);
     }
 
     @Override
     public boolean delete(int id, int userId) {
-        return crudPhoneBaseNoteRepository.delete(id,userId) != 0;
+        return crudNoteRepository.delete(id,userId) != 0;
     }
 
     @Override
-    public PhoneBaseNote getById(int id, int userId) {
-        return crudPhoneBaseNoteRepository.findById(id).filter(phoneBaseNote -> phoneBaseNote.getUser().getId() == userId).orElse(null);
+    public Note getById(int id, int userId) {
+        return crudNoteRepository.findById(id).filter(phoneBaseNote -> phoneBaseNote.getUser().getId() == userId).orElse(null);
     }
 
     @Override
-    public List<PhoneBaseNote> getAll(int userId) {
-        return crudPhoneBaseNoteRepository.getAll(userId);
+    public List<Note> getAll(int userId) {
+        return crudNoteRepository.getAll(userId);
     }
 
     @Override
-    public List<PhoneBaseNote> getByNumber(long number, int userId) {
-        return crudPhoneBaseNoteRepository.getByNumber(number,userId);
+    public List<Note> getByNumber(long number, int userId) {
+        return crudNoteRepository.getByNumber(number,userId);
+    }
+
+    @Override
+    public Note getWithUser(int id, int userId) {
+        return crudNoteRepository.getWithUser(id,userId);
     }
 }

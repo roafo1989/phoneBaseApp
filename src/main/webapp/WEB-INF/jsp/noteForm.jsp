@@ -4,14 +4,14 @@
 <html>
 <head>
     <title>Note</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
 <section>
     <h3><a href="index.html">Home</a></h3>
     <hr>
     <h2>${param.action == 'create' ? 'Create note' : 'Edit note'}</h2>
-    <jsp:useBean id="note" type="ru.home.phoneBaseApp.model.PhoneBaseNote" scope="request"/>
+    <jsp:useBean id="note" type="ru.home.phoneBaseApp.model.Note" scope="request"/>
     <form method="post" action="notes">
         <input type="hidden" name="id" value="${note.id}">
         <dl>

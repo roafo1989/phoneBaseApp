@@ -1,6 +1,5 @@
 package ru.home.phoneBaseApp.model;
 
-import org.hibernate.mapping.FetchProfile;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
@@ -26,6 +25,10 @@ public class User extends AbstractNamedEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "user")
+    @OrderBy("name DESC")
+    private Set<Note> notes;
+
     public User() {
     }
 
@@ -43,6 +46,10 @@ public class User extends AbstractNamedEntity {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
+    }
+
+    public Set<Note> getNotes() {
+        return notes;
     }
 
 }

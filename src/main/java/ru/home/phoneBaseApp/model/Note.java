@@ -1,18 +1,20 @@
 package ru.home.phoneBaseApp.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 @NamedQueries({
-        @NamedQuery(name = PhoneBaseNote.ALL_SORTED, query = "SELECT m FROM PhoneBaseNote m WHERE m.user.id=:userId ORDER BY m.name DESC"),
-        @NamedQuery(name = PhoneBaseNote.BY_NUMBER, query = "SELECT m FROM PhoneBaseNote m WHERE m.user.id=:userId AND m.number=?1"),
-        @NamedQuery(name = PhoneBaseNote.DELETE, query = "DELETE FROM PhoneBaseNote m WHERE m.id=:id AND m.user.id=:userId")})
+        @NamedQuery(name = Note.ALL_SORTED, query = "SELECT m FROM Note m WHERE m.user.id=:userId ORDER BY m.name DESC"),
+        @NamedQuery(name = Note.BY_NUMBER, query = "SELECT m FROM Note m WHERE m.user.id=:userId AND m.number=?1"),
+        @NamedQuery(name = Note.DELETE, query = "DELETE FROM Note m WHERE m.id=:id AND m.user.id=:userId")})
 @Entity
 @Table(name = "NOTES")
-public class PhoneBaseNote extends AbstractNamedEntity {
-    public static final String ALL_SORTED = "PhoneBaseNote.getAll";
-    public static final String DELETE = "PhoneBaseNote.delete";
-    public static final String BY_NUMBER = "PhoneBaseNote.getByNumber";
+public class Note extends AbstractNamedEntity {
+    public static final String ALL_SORTED = "Note.getAll";
+    public static final String DELETE = "Note.delete";
+    public static final String BY_NUMBER = "Note.getByNumber";
 
     @Column(name = "number",nullable = false)
     private long number;
@@ -22,17 +24,18 @@ public class PhoneBaseNote extends AbstractNamedEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @NonNull
     private User user;
 
-    public PhoneBaseNote() {
+    public Note() {
     }
-    public PhoneBaseNote(String name, long number, String comment){
+    public Note(String name, long number, String comment){
         this(null,name,number,comment);
     }
 
 
-    public PhoneBaseNote(Integer id, String name, long number, String comment) {
+    public Note(Integer id, String name, long number, String comment) {
         super(id, name);
         this.number = number;
         this.comment = comment;

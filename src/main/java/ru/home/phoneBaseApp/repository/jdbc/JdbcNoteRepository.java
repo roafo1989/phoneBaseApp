@@ -9,16 +9,16 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
-import ru.home.phoneBaseApp.model.PhoneBaseNote;
-import ru.home.phoneBaseApp.repository.PhoneBaseNoteRepos;
+import ru.home.phoneBaseApp.model.Note;
+import ru.home.phoneBaseApp.repository.NoteRepos;
 
 import java.util.List;
 
 
 @Repository
-public class JdbcNoteRepository implements PhoneBaseNoteRepos {
+public class JdbcNoteRepository implements NoteRepos {
 
-    private static final RowMapper<PhoneBaseNote> ROW_MAPPER = BeanPropertyRowMapper.newInstance(PhoneBaseNote.class);
+    private static final RowMapper<Note> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Note.class);
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -37,17 +37,17 @@ public class JdbcNoteRepository implements PhoneBaseNoteRepos {
     }
 
     @Override
-    public PhoneBaseNote save(PhoneBaseNote phoneBaseNote, int userId) {
+    public Note save(Note note, int userId) {
         MapSqlParameterSource map = new MapSqlParameterSource()
-                .addValue("id", phoneBaseNote.getId())
-                .addValue("name", phoneBaseNote.getName())
-                .addValue("number", phoneBaseNote.getNumber())
-                .addValue("comment", phoneBaseNote.getComment())
+                .addValue("id", note.getId())
+                .addValue("name", note.getName())
+                .addValue("number", note.getNumber())
+                .addValue("comment", note.getComment())
                 .addValue("user_id", userId);
 
-        if (phoneBaseNote.isNew()) {
+        if (note.isNew()) {
             Number newId = insertMeal.executeAndReturnKey(map);
-            phoneBaseNote.setId(newId.intValue());
+            note.setId(newId.intValue());
         } else {
             if (namedParameterJdbcTemplate.update("" +
                             "UPDATE notes " +
@@ -57,7 +57,7 @@ public class JdbcNoteRepository implements PhoneBaseNoteRepos {
                 return null;
             }
         }
-        return phoneBaseNote;
+        return note;
     }
 
     @Override
@@ -66,21 +66,21 @@ public class JdbcNoteRepository implements PhoneBaseNoteRepos {
     }
 
     @Override
-    public PhoneBaseNote getById(int id, int userId) {
-        List<PhoneBaseNote> notes = jdbcTemplate.query(
+    public Note getById(int id, int userId) {
+        List<Note> notes = jdbcTemplate.query(
                 "SELECT * FROM notes WHERE id = ? AND user_id = ?", ROW_MAPPER, id, userId);
         return DataAccessUtils.singleResult(notes);
     }
 
     @Override
-    public List<PhoneBaseNote> getAll(int userId) {
+    public List<Note> getAll(int userId) {
         return jdbcTemplate.query(
                 "SELECT * FROM notes WHERE user_id=? ORDER BY name DESC", ROW_MAPPER, userId);
     }
 
     @Override
-    public List<PhoneBaseNote> getByNumber(long number, int userId) {
-       /* List<PhoneBaseNote> notes = jdbcTemplate.query("SELECT * FROM notes WHERE number=? AND user_id = ?", ROW_MAPPER, number, userId);
+    public List<Note> getByNumber(long number, int userId) {
+       /* List<Note> notes = jdbcTemplate.query("SELECT * FROM notes WHERE number=? AND user_id = ?", ROW_MAPPER, number, userId);
         return DataAccessUtils.singleResult(notes);*/
        return jdbcTemplate.query("SELECT * FROM notes WHERE number=? AND user_id = ?", ROW_MAPPER, number, userId);
     }
