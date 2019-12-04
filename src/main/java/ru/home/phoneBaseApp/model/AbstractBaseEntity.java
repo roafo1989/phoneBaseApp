@@ -1,8 +1,12 @@
 package ru.home.phoneBaseApp.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 
 @MappedSuperclass
 @Access(AccessType.FIELD)
@@ -10,7 +14,7 @@ public class AbstractBaseEntity {
     public static final int START_SEQ = 100000;
 
     @Id
-    @SequenceGenerator(name = "global_seq",sequenceName = "global_seq",allocationSize = 1)
+    @SequenceGenerator(name = "global_seq",sequenceName = "global_seq",allocationSize = 1,initialValue = START_SEQ)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "global_seq")
     protected Integer id;
 

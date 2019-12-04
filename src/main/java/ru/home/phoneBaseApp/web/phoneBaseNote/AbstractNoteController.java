@@ -39,6 +39,7 @@ public abstract class AbstractNoteController {
     }
 
     public Note create(Note note) {
+        note.setId(null);
         int userId = SecurityUtil.authUserId();
         checkNew(note);
         log.info("create {} for user {}", note, userId);
@@ -46,6 +47,7 @@ public abstract class AbstractNoteController {
     }
 
     public void update(Note note, int id) {
+        note.setId(id);
         int userId = SecurityUtil.authUserId();
         assureIdConsistent(note, id);
         log.info("update {} for user {}", note, userId);

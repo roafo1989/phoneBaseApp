@@ -5,6 +5,8 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import java.beans.ConstructorProperties;
+
 @NamedQueries({
         @NamedQuery(name = Note.ALL_SORTED, query = "SELECT m FROM Note m WHERE m.user.id=:userId ORDER BY m.name DESC"),
         @NamedQuery(name = Note.BY_NUMBER, query = "SELECT m FROM Note m WHERE m.user.id=:userId AND m.number=?1"),
@@ -34,7 +36,7 @@ public class Note extends AbstractNamedEntity {
         this(null,name,number,comment);
     }
 
-
+    @ConstructorProperties({"id","name","number","comment"})
     public Note(Integer id, String name, long number, String comment) {
         super(id, name);
         this.number = number;

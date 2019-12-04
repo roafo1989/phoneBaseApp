@@ -1,37 +1,61 @@
 package ru.home.phoneBaseApp.web.user;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.home.phoneBaseApp.model.User;
 
+import java.net.URI;
 import java.util.List;
-@Controller
+@RestController
+@RequestMapping(value = AdminRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class AdminRestController extends AbstractUserController {
 
-    @Override
+    static final String REST_URL = "/rest/admin/users";
+
+    @GetMapping
     public List<User> getAll() {
         return super.getAll();
     }
 
     @Override
-    public User create(User user) {
-        return super.create(user);
+    @GetMapping("/{id}")
+    public User getById(@PathVariable int id) {
+        return super.getById(id);
     }
-    @Override
-    public void update(User user, int id) {
-        super.update(user, id);}
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> createWithLocation(@RequestBody User user) {
+        User created = super.create(user);
+        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path(REST_URL + "/{id}")
+                .buildAndExpand(created.getId()).toUri();
+        return ResponseEntity.created(uriOfNewResource).body(created);
+    }
 
     @Override
-    public void delete(int id) {
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable int id) {
         super.delete(id);
     }
 
     @Override
-    public User getById(int id) {
-        return super.getById(id);
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void update(@RequestBody User user, @PathVariable int id) {
+        super.update(user, id);
     }
 
     @Override
-    public User getByName(String name) {
+    @GetMapping("/by")
+    public User getByName(@RequestParam String name) {
         return super.getByName(name);
     }
+
+
+
 }

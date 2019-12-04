@@ -1,16 +1,18 @@
 package ru.home.phoneBaseApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 @Entity
 @Table(name = "USERS")
 @NamedQueries({
         @NamedQuery(name = User.DELETE, query = "DELETE FROM User u WHERE u.id=:id"),
-        @NamedQuery(name = User.BY_NAME, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles WHERE u.name=?1"),
+        @NamedQuery(name = User.BY_NAME, query = "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.roles WHERE u.name=?1"),
         @NamedQuery(name = User.ALL_SORTED, query = "SELECT u FROM User u LEFT JOIN FETCH u.roles ORDER BY u.name"),
 })
 public class User extends AbstractNamedEntity {
@@ -27,7 +29,7 @@ public class User extends AbstractNamedEntity {
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "user")
     @OrderBy("name DESC")
-    private Set<Note> notes;
+    private List<Note> notes;
 
     public User() {
     }
@@ -48,7 +50,7 @@ public class User extends AbstractNamedEntity {
         this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
     }
 
-    public Set<Note> getNotes() {
+    public List<Note> getNotes() {
         return notes;
     }
 
