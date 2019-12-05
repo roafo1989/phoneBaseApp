@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 public class RootController {
     @Autowired
     private UserService userService;
+
     @Autowired
     private NoteService noteService;
 

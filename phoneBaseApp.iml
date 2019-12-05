@@ -85,6 +85,12 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:5.2.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.2.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:5.2.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars:jquery:3.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars.bower:bootstrap:4.4.0" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars:datatables:1.10.20" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars.bower:datetimepicker:2.5.20" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars.bower:jquery-mousewheel:3.1.13" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars.bower:noty:3.1.4" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.10.1" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.10.1" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.10.1" level="project" />

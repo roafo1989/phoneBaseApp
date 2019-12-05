@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping(value = NoteRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class NoteRestController extends AbstractNoteController {
 
-    static final String REST_URL = "/rest/profile/meals";
+    static final String REST_URL = "/rest/profile/notes";
 
     @Override
     @GetMapping("/{id}")
@@ -39,7 +39,7 @@ public class NoteRestController extends AbstractNoteController {
     @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public void update(@RequestBody Note note,@PathVariable int id) {
+    public void update(@RequestBody Note note,@PathVariable ("id") int id) {
         super.update(note, id);
     }
 
@@ -52,7 +52,6 @@ public class NoteRestController extends AbstractNoteController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Note> createWithLocation(@RequestBody Note note) {
         Note created = super.create(note);
-
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();

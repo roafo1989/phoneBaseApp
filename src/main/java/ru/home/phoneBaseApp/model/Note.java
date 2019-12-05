@@ -36,7 +36,7 @@ public class Note extends AbstractNamedEntity {
         this(null,name,number,comment);
     }
 
-    @ConstructorProperties({"id","name","number","comment"})
+   /* @ConstructorProperties({"id","name","number","comment"})*/
     public Note(Integer id, String name, long number, String comment) {
         super(id, name);
         this.number = number;

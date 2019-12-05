@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <html>
 <head>
     <title>Notes</title>
@@ -8,7 +10,7 @@
 </head>
 <body>
 <section>
-    <h3><a href="index.jsp">Home</a></h3>
+    <h3><a href="${pageContext.request.contextPath}">Home</a></h3>
     <hr/>
     <h2>Notes</h2>
     <form method="get" action="notes">
@@ -20,7 +22,7 @@
         <button type="submit">Filter</button>
     </form>
     <hr/>
-    <a href="notes?action=create">Add Note</a>
+    <a href="notes/create">Add Note</a>
     <br><br>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
@@ -38,8 +40,8 @@
                 <td>${note.name}</td>
                 <td>${note.number}</td>
                 <td>${note.comment}</td>
-                <td><a href="notes?action=update&id=${note.id}">Update</a></td>
-                <td><a href="notes?action=delete&id=${note.id}">Delete</a></td>
+                <td><a href="notes/update?id=${note.id}">Update</a></td>
+                <td><a href="notes/delete?id=${note.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

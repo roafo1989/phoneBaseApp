@@ -8,7 +8,7 @@
 </head>
 <body>
 <section>
-    <h3><a href="index.html">Home</a></h3>
+    <h3><a href="${pageContext.request.contextPath}">Home</a></h3>
     <hr>
     <h2>${param.action == 'create' ? 'Create note' : 'Edit note'}</h2>
     <jsp:useBean id="note" type="ru.home.phoneBaseApp.model.Note" scope="request"/>
@@ -19,8 +19,12 @@
             <dd><input type="text" value="${note.name}" size=40 name="name" required></dd>
         </dl>
         <dl>
-            <dt>Phone Numbers:</dt>
+            <dt>Phone Number:</dt>
             <dd><input type="number" value="${note.number}" name="number" required></dd>
+        </dl>
+        <dl>
+            <dt>Comment:</dt>
+            <dd><input type="comment" value="${note.comment}" name="comment"></dd>
         </dl>
         <button type="submit">Save</button>
         <button onclick="window.history.back()" type="button">Cancel</button>

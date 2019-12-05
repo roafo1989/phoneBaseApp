@@ -1,13 +1,17 @@
 package ru.home.phoneBaseApp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jdk.nashorn.internal.objects.annotations.Getter;
+import jdk.nashorn.internal.objects.annotations.Setter;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Set;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.*;
+
 @Entity
 @Table(name = "USERS")
 @NamedQueries({
@@ -20,6 +24,24 @@ public class User extends AbstractNamedEntity {
     public static final String DELETE = "User.delete";
     public static final String BY_NAME = "User.getByName";
     public static final String ALL_SORTED = "User.getAllSorted";
+
+    @Column(name = "email", nullable = false, unique = true)
+    @Email
+    @NotBlank
+    @Size(max = 100)
+    private String email;
+
+    @Column(name = "password", nullable = false)
+    @NotBlank
+    @Size(min = 5, max = 100)
+    private String password;
+
+    @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
+    private boolean enabled = true;
+
+    @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()")
+    @NotNull
+    private Date registered = new Date();
 
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles",joinColumns = @JoinColumn(name = "user_id"))
@@ -35,10 +57,17 @@ public class User extends AbstractNamedEntity {
     }
 
     public User(User u){
-        this(u.getId(),u.getName(),u.getRoles());
+        this(u.getId(),u.getName(), u.getEmail(), u.getPassword(), u.isEnabled(), u.getRegistered(),u.getRoles());
     }
-    public User(Integer id, String name, Collection<Role> roles) {
+    public User(Integer id, String name,String email, String password, Role role, Role... roles) {
+        this(id,name,email,password,true,new Date(),EnumSet.of(role,roles));
+    }
+    public User(Integer id, String name, String email, String password, boolean enabled, Date registered, Collection<Role> roles) {
         super(id, name);
+        this.email = email;
+        this.password = password;
+        this.enabled = enabled;
+        this.registered = registered;
         setRoles(roles);
     }
 
@@ -54,4 +83,35 @@ public class User extends AbstractNamedEntity {
         return notes;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Date getRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(Date registered) {
+        this.registered = registered;
+    }
 }
