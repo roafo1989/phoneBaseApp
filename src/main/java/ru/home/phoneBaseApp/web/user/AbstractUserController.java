@@ -46,4 +46,8 @@ public class AbstractUserController {
         log.info("getByName {}", name);
         return service.getByName(name);
     }
+    public void enable(int id, boolean enabled) {
+        log.info(enabled ? "enable {}" : "disable {}", id);
+        service.enable(id, enabled);
+    }
 }

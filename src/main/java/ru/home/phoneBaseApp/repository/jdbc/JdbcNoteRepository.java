@@ -24,11 +24,11 @@ public class JdbcNoteRepository implements NoteRepos {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private final SimpleJdbcInsert insertMeal;
+    private final SimpleJdbcInsert insertNote;
 
     @Autowired
     public JdbcNoteRepository(JdbcTemplate jdbcTemplate, NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.insertMeal = new SimpleJdbcInsert(jdbcTemplate)
+        this.insertNote = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("notess")
                 .usingGeneratedKeyColumns("id");
 
@@ -46,7 +46,7 @@ public class JdbcNoteRepository implements NoteRepos {
                 .addValue("user_id", userId);
 
         if (note.isNew()) {
-            Number newId = insertMeal.executeAndReturnKey(map);
+            Number newId = insertNote.executeAndReturnKey(map);
             note.setId(newId.intValue());
         } else {
             if (namedParameterJdbcTemplate.update("" +

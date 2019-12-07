@@ -6,8 +6,8 @@
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
-<script type="text/javascript" src="resources/js/topjava.common.js" defer></script>
-<script type="text/javascript" src="resources/js/topjava.meals.js" defer></script>
+<script type="text/javascript" src="resources/js/phone.common.js" defer></script>
+<script type="text/javascript" src="resources/js/phone.users.js" defer></script>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
 <div class="jumbotron pt-4">
@@ -31,11 +31,13 @@
             </thead>
             <c:forEach items="${users}" var="user">
                 <jsp:useBean id="user" type="ru.home.phoneBaseApp.model.User"/>
+                <tr data-userEnabled="${user.enabled}">
                 <tr>
                     <td>${user.name}</td>
                     <td><a href="mailto:${user.email}">${user.email}</a></td>
                     <td>${user.roles}</td>
-                    <td><input type="checkbox" <c:if test="${user.enabled}">checked</c:if>/></td>
+                    <td><input type="checkbox"
+                               <c:if test="${user.enabled}">checked</c:if> onclick="enable($(this), ${user.id})"/></td>
                     <td><fmt:formatDate value="${user.registered}" pattern="dd-MMMM-yyyy"/></td>
                     <td><a><span class="fa fa-pencil"></span></a></td>
                     <td><a onclick="deleteRow(${user.id})"><span class="fa fa-remove"></span></a></td>

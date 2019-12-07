@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/ajax/profile/meals")
+@RequestMapping("/ajax/profile/notes")
 public class NoteUIController extends AbstractNoteController {
     @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

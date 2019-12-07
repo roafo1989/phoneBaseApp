@@ -6,8 +6,8 @@
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
-<script type="text/javascript" src="resources/js/topjava.common.js" defer></script>
-<script type="text/javascript" src="resources/js/topjava.notes.js" defer></script>
+<script type="text/javascript" src="resources/js/phone.common.js" defer></script>
+<script type="text/javascript" src="resources/js/phone.notes.js" defer></script>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
 <div class="jumbotron pt-4">
@@ -25,7 +25,7 @@
             </div>
         </div>
         <br/>
-        <button type="button" class="btn btn-primary" onclick="add()">
+        <button class="btn btn-primary" onclick="add()">
             <span class="fa fa-plus"></span>
             add
         </button>
@@ -66,7 +66,7 @@
 
                     <div class="form-group">
                         <label for="name" class="col-form-label">name</label>
-                        <input type="datetime-local" class="form-control" id="name" name="name"
+                        <input type="text" class="form-control" id="name" name="name"
                                placeholder="name">
                     </div>
 

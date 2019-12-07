@@ -33,5 +33,5 @@ CREATE TABLE notes
     comment     TEXT,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
-CREATE UNIQUE INDEX meals_unique_user_number_idx
+CREATE UNIQUE INDEX notes_unique_user_number_idx
     ON notes (user_id, number);
