@@ -26,8 +26,15 @@ public class RootController {
     @GetMapping("/users")
     public String getUsers(Model model) {
         model.addAttribute("users", userService.getAll());
-        return "/users.jsp";
+        return "users";
     }
+
+    @GetMapping("/notes")
+    public String getNotes(Model model){
+        model.addAttribute("notes",noteService.getAll(SecurityUtil.authUserId()));
+        return "notes";
+    }
+
 
     @PostMapping("/users")
     public String setUser(HttpServletRequest request) {
@@ -36,10 +43,5 @@ public class RootController {
         return "redirect:notes";
     }
 
-    @GetMapping("/notes")
-    public String getNotes(Model model){
-        model.addAttribute("notes",noteService.getAll(SecurityUtil.authUserId()));
-        return "notes";
-    }
 
 }
